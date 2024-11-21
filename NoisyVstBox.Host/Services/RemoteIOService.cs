@@ -14,7 +14,7 @@ namespace NoisyVstBox.Host.Services
         public void SendMessageToLCD(string msg)
         {
             string portName = "COM4"; // Change this to your Arduino's port (e.g., COM3, /dev/ttyACM0, etc.)
-            int baudRate = 9600;
+            int baudRate = 28880;
 
             // Open the serial port
             using (SerialPort serialPort = new SerialPort(portName, baudRate))
