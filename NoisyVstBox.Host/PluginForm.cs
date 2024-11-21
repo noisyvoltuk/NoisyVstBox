@@ -102,7 +102,9 @@ partial class PluginForm : Form
     private void FillProgram()
     {
         ProgramIndexNud.Value = PluginContext.PluginCommandStub.Commands.GetProgram();
-        ProgramListCmb.Text = PluginContext.PluginCommandStub.Commands.GetProgramName();
+        var programName = PluginContext.PluginCommandStub.Commands.GetProgramName();
+        ProgramListCmb.Text = programName;
+        _remoteIOService.SendMessageToLCD($"changed to {programName}");
     }
 
     private void FillParameterList()
@@ -147,8 +149,9 @@ partial class PluginForm : Form
         if (ProgramIndexNud.Value < PluginContext.PluginInfo.ProgramCount &&
             ProgramIndexNud.Value >= 0)
         {
-            _remoteIOService.SendMessageToLCD($"changed to {ProgramIndexNud.Value}");
+          
             PluginContext.PluginCommandStub.Commands.SetProgram((int)ProgramIndexNud.Value);
+
 
             FillProgram();
             FillParameterList();
